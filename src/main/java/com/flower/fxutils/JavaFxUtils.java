@@ -39,6 +39,14 @@ public class JavaFxUtils {
     NO
   }
 
+  public static boolean isInvalidAmountChar(@Nullable KeyEvent event) {
+    if (event == null || event.getCharacter() == null || event.getCharacter().isEmpty()) {
+      return false;
+    }
+    char c = event.getCharacter().charAt(0);
+    return !(c >= '0' && c <= '9' || c == '.' || c == '\b' || c == '\u007F' || c == '\u0016');
+  }
+
   public static final UnaryOperator<TextFormatter.Change> DECIMAL_TEXT_FILTER = change -> {
     String newText = change.getControlNewText();
     if (newText.matches("\\d*([.]\\d*)?")) {
