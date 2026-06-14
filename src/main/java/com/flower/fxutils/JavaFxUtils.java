@@ -48,6 +48,10 @@ public class JavaFxUtils {
   }
 
   public static final UnaryOperator<TextFormatter.Change> DECIMAL_TEXT_FILTER = change -> {
+    String inserted = change.getText();
+    inserted = inserted.replace(",", "");
+    change.setText(inserted);
+
     String newText = change.getControlNewText();
     if (newText.matches("\\d*([.]\\d*)?")) {
       return change;
